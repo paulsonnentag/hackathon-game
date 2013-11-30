@@ -2,8 +2,8 @@ int millisAlt;
 int untenBlocksBauen=5;
 boolean untenRobust=false;
 boolean isRunning=false;
-int manHeight=40;
-int manWidth=20;
+int manHeight=78;
+int manWidth=30;
 
 PImage bodenDecke = loadImage("bodenDecke.png");
 
