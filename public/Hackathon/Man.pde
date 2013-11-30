@@ -52,8 +52,9 @@ class Man {
         if (platform.platformRobust) {
         if((y+manHeight)>platform.y && y<(platform.y+platformHeight)){
             if (abs((platform.x-(x+manWidth)))<2) { //theoretisch abs nicht nötig
-              ellipse(platform.x,platform.y,10,10);
-              x=x-2;
+            // x=(platform.x-1); 
+            x= platform.x-manWidth-2;
+             //x=x-2;
             }
             
           }
@@ -61,7 +62,7 @@ class Man {
           if (schwerkraft<0) {
             if (platform.x+5 <= (x+manWidth) && x < (platform.x+platformHeight)) { // 5= Toleranzwert: nicht entfernen
               if (abs(platform.y+platformHeight-y)<3) {
-
+                y=platform.y+platformHeight;
                 platformUpdated=true;
                 aufgekommen=true;
               }
@@ -70,7 +71,7 @@ class Man {
           if (schwerkraft>0) {
             if (platform.x+5 <= (x+manWidth) && x < (platform.x+platformHeight)) {
               if (abs(platform.y-(y+manHeight))<3) {
-
+                 y = (platform.y-manHeight);
                 platformUpdated=true;
                 aufgekommen=true;
               }
