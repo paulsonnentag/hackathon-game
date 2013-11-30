@@ -1,11 +1,10 @@
 int millisAlt;
 int untenBlocksBauen=5;
 boolean untenRobust=false;
+boolean isRunning=false;
 int manHeight=40;
 
-
 int platformHeight=20;
-int anzahlDerSpieler=3;
 
 ArrayList<Platform> platforms;
 ArrayList<Man> spielFiguren;
@@ -53,13 +52,6 @@ void setup() {
   newPlatformPosition=stringLevelData[0].length()*platformHeight;
   println(newPlatformPosition);
 
-
-  for (int i=0; i<anzahlDerSpieler; i++) {
-    Man man = new Man();
-    man.x=(100+(manHeight+4)*i);
-    man.y=platformHeight+50;
-    spielFiguren.add(man);
-  }
 }
 
 void draw() {
@@ -69,21 +61,47 @@ void draw() {
     for (Platform platform : platforms) {
       platform.drawPlatform();
 
-      platform.x-=2;
-
-      if (platform.x < -platformHeight) {
-        platform.x=newPlatformPosition;
+      if (isRunning) {
+        platform.x-=2;
+  
+        if (platform.x < -platformHeight) {
+          platform.x=newPlatformPosition;
+        }
       }
+      
     }
     // anzahlDerLevelDurchlauefe
   }
 
   for (Man man: spielFiguren) {
-    man.simulateGravity();
+    
+    if (isRunning) {
+      man.simulateGravity();
+    }
+    
     man.drawMan();
   }
 }
 
+void startGame () {
+  isRunning = true; 
+}
+
+void addPlayer (String id) {
+  Man man = new Man();
+  man.x=(100+(manHeight+4)*spielFiguren.size());
+  man.y=platformHeight+50;
+  man.id = id;
+  spielFiguren.add(man);
+}
+
+void removePlayer (String id) {
+  for (int i = 0; i < spielFiguren.size(); i++) {
+    if (spielFiguren.get(i).id == id) {
+      spielFiguren.remove(i);
+    }
+  }
+}
 
 void keyPressed() {
   if (key == '1') {
@@ -100,12 +118,17 @@ void keyPressed() {
 }
 
 
-void touchDown(int ID) {
-  spielFiguren.get(ID).turnGravity();
+void touchDown(String id) {
+  for (Man man: spielFiguren) {
+    if (man.id == id) {
+      man.turnGravity();
+    }
+  }
 }
 
 class Man {
 
+  String id;
   int x;
   int y;
   boolean manLebendig=true;

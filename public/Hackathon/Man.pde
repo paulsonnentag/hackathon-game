@@ -1,5 +1,6 @@
 class Man {
 
+  String id;
   int x;
   int y;
   boolean manLebendig=true;

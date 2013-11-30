@@ -1,9 +1,11 @@
-/*globals cloak*/
+/*globals cloak Processing*/
 
 (function () {
 
   'use strict';
 
+  var game;
+  var clientId;
   var room;
 
   cloak.configure({
@@ -12,36 +14,38 @@
 
         console.log('ready ...');
 
-        setTimeout(function () {
-
-          console.log('start');
-          cloak.message('startGame');
-
-        }, 1000);
+        game.startGame();
+        cloak.message('startGame');
 
       },
 
       userAction: function (msg) {
-        console.log('player' + msg.user.id + ' ' + msg.action);
+        console.log('toggle', msg.user.id);
+        game.touchDown(msg.user.id);
       }
     },
 
     serverEvents: {
       begin: function () {
-        console.log('start');
+        console.log('create game');
         cloak.message('createGame', {gameId: 1});
       },
 
       joinedRoom: function (msg) {
         console.log('game created');
+        game = Processing.getInstanceById('Hackathon');
       },
 
-      roomMemberJoined: function (msg) {
-        console.log('member ' + msg.name + ' id:' + msg.id + ' joined');
+      roomMemberJoined: function (user) {
+        if (!clientId) {
+          clientId = user.id;
+        } else {
+          game.addPlayer(user.id);
+        }
       },
 
-      roomMemberLeft: function (msg) {
-        console.log('member ' + msg.name + ' id:' + msg.id + ' left');
+      roomMemberLeft: function (user) {
+        game.removePlayer(user.id);
       }
     }
   });
