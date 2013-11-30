@@ -10,7 +10,7 @@ class Man {
 
   void drawMan() {
     if (manLebendig==true) {
-      ellipse(x, y, manHeight, manHeight);
+      rect(x, y, manWidth, manHeight);
     }
   }
 
@@ -37,19 +37,17 @@ class Man {
     for (ArrayList platforms : levelData) {
       for (Platform platform : platforms) {
         if (platform.platformRobust) {
-
-          if (y>platform.y && y<platform.y+platformHeight) {
-            if (platform.x-platformHeight/2-x<3) {
-              if (x>platform.x+platformHeight) {
-                x-=2;
-              }
+        if((y+manHeight)>platform.y && y<(platform.y+platformHeight)){
+            if (abs((platform.x-(x+manWidth)))<2) { //theoretisch abs nicht nötig
+              ellipse(platform.x,platform.y,10,10);
+              x=x-2;
             }
+            
           }
 
-
           if (schwerkraft<0) {
-            if (platform.x-platformHeight <= x && x < platform.x+platformHeight) {
-              if (abs(platform.y+(manHeight/2)+platformHeight-y)<3) {
+            if (platform.x+5 <= (x+manWidth) && x < (platform.x+platformHeight)) { // 5= Toleranzwert: nicht entfernen
+              if (abs(platform.y+platformHeight-y)<3) {
 
                 platformUpdated=true;
                 aufgekommen=true;
@@ -57,8 +55,8 @@ class Man {
             }
           }
           if (schwerkraft>0) {
-            if (platform.x-platformHeight <= x && x < platform.x+platformHeight) {
-              if (abs(platform.y-(y+manHeight/2))<3) {
+            if (platform.x+5 <= (x+manWidth) && x < (platform.x+platformHeight)) {
+              if (abs(platform.y-(y+manHeight))<3) {
 
                 platformUpdated=true;
                 aufgekommen=true;
@@ -73,6 +71,6 @@ class Man {
     if (!platformUpdated) {
       aufgekommen=false;
     }
+    
   }
 }
-

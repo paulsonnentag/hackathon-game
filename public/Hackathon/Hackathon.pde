@@ -3,8 +3,12 @@ int untenBlocksBauen=5;
 boolean untenRobust=false;
 boolean isRunning=false;
 int manHeight=40;
+int manWidth=20;
 
-int platformHeight=20;
+PImage bodenDecke = loadImage("bodenDecke.png");
+
+
+int platformHeight=30;
 
 ArrayList<Platform> platforms;
 ArrayList<Man> spielFiguren;
@@ -63,27 +67,27 @@ void draw() {
 
       if (isRunning) {
         platform.x-=2;
-  
+
         if (platform.x < -platformHeight) {
           platform.x=newPlatformPosition;
         }
       }
-      
+
     }
     // anzahlDerLevelDurchlauefe
   }
 
   for (Man man: spielFiguren) {
-    
+
     if (isRunning) {
       man.simulateGravity();
     }
-  
+
     if (man.manLebendig) {
-      man.drawMan();    
+      man.drawMan();
     } else {
       removePlayer(man.id);
-     
+
      if (spielFiguren.size() == 1) {
        gameOver();
      }
@@ -92,12 +96,12 @@ void draw() {
 }
 
 void startGame () {
-  isRunning = true; 
+  isRunning = true;
 }
 
 void addPlayer (String id) {
   Man man = new Man();
-  man.x=(100+(manHeight+4)*spielFiguren.size());
+  man.x=(100+(manWidth+4)*spielFiguren.size());
   man.y=platformHeight+50;
   man.id = id;
   spielFiguren.add(man);
@@ -133,4 +137,3 @@ void touchDown(String id) {
     }
   }
 }
-
