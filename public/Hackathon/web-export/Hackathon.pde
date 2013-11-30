@@ -26,7 +26,7 @@ void setup() {
   spielFiguren=new ArrayList<Man>();
 
   String stringLevelData[] = loadStrings("level.txt");
-  //platformHeight=(int)(height/stringLevelData.length);
+  platformHeight=(int)(height/stringLevelData.length);
 
 
 
@@ -151,7 +151,7 @@ class Man {
 
   void simulateGravity() {
 
-    if (y>height || y<0) {
+    if (y>height || y<0 || x<0) {
       manLebendig=false;
     }
 
@@ -165,11 +165,20 @@ class Man {
     for (ArrayList platforms : levelData) {
       for (Platform platform : platforms) {
         if (platform.platformRobust) {
-          if (schwerkraft<0) {
 
+          if (y>platform.y && y<platform.y+platformHeight) {
+            if (platform.x-platformHeight/2-x<3) {
+              if (x>platform.x+platformHeight) {
+                x-=2;
+              }
+            }
+          }
+
+
+          if (schwerkraft<0) {
             if (platform.x-platformHeight <= x && x < platform.x+platformHeight) {
               if (abs(platform.y+(manHeight/2)+platformHeight-y)<3) {
-                
+
                 platformUpdated=true;
                 aufgekommen=true;
               }

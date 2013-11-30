@@ -26,7 +26,7 @@ void setup() {
   spielFiguren=new ArrayList<Man>();
 
   String stringLevelData[] = loadStrings("level.txt");
-  //platformHeight=(int)(height/stringLevelData.length);
+  platformHeight=(int)(height/stringLevelData.length);
 
 
 
