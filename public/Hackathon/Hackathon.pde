@@ -5,7 +5,7 @@ int manHeight=40;
 
 
 int platformHeight=30;
-int anzahlDerSpieler=3;
+int anzahlDerSpieler=2;
 
 ArrayList<Platform> platforms;
 ArrayList<Man> spielFiguren;
@@ -27,7 +27,7 @@ void setup() {
   spielFiguren=new ArrayList<Man>();
 
   String stringLevelData[] = loadStrings("level.txt");
-  //platformHeight=(int)(height/stringLevelData.length);
+  platformHeight=(int)(height/stringLevelData.length);
 
 
 
