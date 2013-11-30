@@ -78,8 +78,16 @@ void draw() {
     if (isRunning) {
       man.simulateGravity();
     }
-    
-    man.drawMan();
+  
+    if (man.manLebendig) {
+      man.drawMan();    
+    } else {
+      removePlayer(man.id);
+     
+     if (spielFiguren.size() == 1) {
+       gameOver();
+     }
+    }
   }
 }
 
@@ -103,7 +111,7 @@ void removePlayer (String id) {
   }
 }
 
-void keyPressed() {
+/*void keyPressed() {
   if (key == '1') {
     touchDown(0);
   }
@@ -115,7 +123,7 @@ void keyPressed() {
   if (key == '3') {
     touchDown(2);
   }
-}
+}*/
 
 
 void touchDown(String id) {
@@ -146,12 +154,13 @@ class Man {
     if (manLebendig && aufgekommen) {
       schwerkraft=-1*schwerkraft;
       aufgekommen=false;
+      println("TURN");
     }
   }
 
   void simulateGravity() {
 
-    if (y>height || y<0 || x<0) {
+    if (y>height-platformHeight || y<platformHeight) {
       manLebendig=false;
     }
 
@@ -164,38 +173,15 @@ class Man {
 
     for (ArrayList platforms : levelData) {
       for (Platform platform : platforms) {
-        if (platform.platformRobust) {
 
-          if (y>platform.y && y<platform.y+platformHeight) {
-            if (platform.x-platformHeight/2-x<3) {
-              if (x>platform.x+platformHeight) {
-                x-=2;
-              }
-            }
-          }
-
-
-          if (schwerkraft<0) {
-            if (platform.x-platformHeight <= x && x < platform.x+platformHeight) {
-              if (abs(platform.y+(manHeight/2)+platformHeight-y)<3) {
-
-                platformUpdated=true;
-                aufgekommen=true;
-              }
-            }
-          }
-          if (schwerkraft>0) {
-            if (platform.x-platformHeight <= x && x < platform.x+platformHeight) {
-              if (abs(platform.y-(y+manHeight/2))<3) {
-
-                platformUpdated=true;
-                aufgekommen=true;
-              }
-            }
-          }
+        if (schwerkraft<0) {
+          
+        }
+        if (schwerkraft>0) {
         }
       }
     }
+
 
 
     if (!platformUpdated) {

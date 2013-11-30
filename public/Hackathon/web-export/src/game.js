@@ -1,5 +1,6 @@
 /*globals cloak Processing*/
 
+
 (function () {
 
   'use strict';
@@ -32,8 +33,10 @@
       },
 
       joinedRoom: function (msg) {
-        console.log('game created');
-        game = Processing.getInstanceById('Hackathon');
+        if (msg.name !== 'Lobby') {
+          console.log('game created', name);
+          game = Processing.getInstanceById('Hackathon');
+        }
       },
 
       roomMemberJoined: function (user) {
@@ -45,10 +48,16 @@
       },
 
       roomMemberLeft: function (user) {
+        console.log('member left');
         game.removePlayer(user.id);
       }
     }
   });
+
+  window.gameOver = function () {
+    cloak.message('gameOver');
+    console.log('gameOver');
+  };
 
   cloak.run();
 

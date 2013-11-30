@@ -78,8 +78,16 @@ void draw() {
     if (isRunning) {
       man.simulateGravity();
     }
-    
-    man.drawMan();
+  
+    if (man.manLebendig) {
+      man.drawMan();    
+    } else {
+      removePlayer(man.id);
+     
+     if (spielFiguren.size() == 1) {
+       gameOver();
+     }
+    }
   }
 }
 
@@ -103,7 +111,7 @@ void removePlayer (String id) {
   }
 }
 
-void keyPressed() {
+/*void keyPressed() {
   if (key == '1') {
     touchDown(0);
   }
@@ -115,7 +123,7 @@ void keyPressed() {
   if (key == '3') {
     touchDown(2);
   }
-}
+}*/
 
 
 void touchDown(String id) {

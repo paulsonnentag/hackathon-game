@@ -11,8 +11,6 @@
 
   window.addEventListener('load', function () {
 
-    console.log('loiad')
-
     FastClick.attach(document.body);
 
     var joinButton = document.getElementById('joinButton');
@@ -29,7 +27,6 @@
     });
 
   });
-
 
   cloak.configure({
     messages: {
