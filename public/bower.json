@@ -1,0 +1,13 @@
+{
+  "name": "hackathon-game",
+  "version": "0.0.0",
+  "homepage": "https://github.com/BrackCurly/hackathon-game",
+  "authors": [
+    "''"
+  ],
+  "license": "WTFPL",
+  "private": true,
+  "dependencies": {
+    "underscore": "~1.5.2"
+  }
+}

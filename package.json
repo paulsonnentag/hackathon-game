@@ -1,0 +1,24 @@
+{
+  "name": "hackathon-game",
+  "version": "0.0.0",
+  "description": "entry for hackathon stuttgart goes university",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrackCurly/hackathon-game"
+  },
+  "author": "",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/BrackCurly/hackathon-game/issues"
+  },
+  "homepage": "https://github.com/BrackCurly/hackathon-game",
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "express": "~3.4.5",
+    "cloak": "~0.2.0"
+  }
+}
