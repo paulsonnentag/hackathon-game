@@ -16,13 +16,16 @@
     FastClick.attach(document.body);
 
     var joinButton = document.getElementById('joinButton');
-
     joinButton.addEventListener('click', function (evt) {
       var nameInput = document.getElementById('nameInput');
-
       console.log('join');
 
       cloak.message('joinGame', {name: nameInput.value});
+    });
+
+    var controllerScreen = document.getElementById('controller');
+    controllerScreen.addEventListener('click', function (evt) {
+      cloak.message('userAction');
     });
 
   });
