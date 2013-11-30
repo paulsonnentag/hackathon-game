@@ -8,50 +8,56 @@ int platformHeight=20;
 int anzahlDerSpieler=3;
 
 ArrayList<Platform> platforms;
-ArrayList<bool> lastPlatformRobusticas; //provisorisch, Nutzen umstritten
 ArrayList<Man> spielFiguren;
 
+ArrayList<ArrayList> levelData;
+int anzahlDerLevelDurchlauefe=0;
 
 int newPlatformPosition;
 int anzahlDerVerschiebung=5;
 
+
+
 void setup() {
-  frameRate(35);
+  frameRate(50);
   size(1024, 400);
   platforms= new ArrayList<Platform>();
   lastPlatformRobusticas=new ArrayList<bool>();
+  levelData=new ArrayList<ArrayList>();
   spielFiguren=new ArrayList<Man>();
 
-  for (int i=0; i<anzahlDerVerschiebung; i++) {
+  String stringLevelData[] = loadStrings("level.txt");
+  platformHeight=(int)(height/stringLevelData.length);
 
-    lastPlatformRobusticas.add(true);
+
+
+  for (int i=0; i<stringLevelData.length; i++) {
+    ArrayList<Platform> platforms;
+    platforms = new ArrayList<Platform>();
+    for (int q=0; q<stringLevelData[i].length(); q++) {
+      Platform platform= new Platform();
+      platform.y=platformHeight*i;
+      platform.x=platformHeight*q;
+
+      if (stringLevelData[i].substring(q, q+1).equals("x")) {
+        platform.platformRobust=true;
+      }
+      platforms.add(platform);
+    }
+    levelData.add(platforms);
   }
 
-  for (int i=0; i<((int)(width/platformHeight)+2); i++) {
 
 
-    Platform platformOben=new Platform();
-    platformOben.y=0;
-    platformOben.x=platformHeight*i;
-    platformOben.platformRobust=true;
-    platforms.add(platformOben);
-
-
-    Platform platformUnten=new Platform();
-    platformUnten.y=height-platformHeight;
-    platformUnten.x=platformHeight*i;
-    platformUnten.platformRobust=true;
-    platforms.add(platformUnten);
-  }
   //-2 ist die magische Zahl (vermutlich der Rand des Rechtecks)
-  newPlatformPosition=((int)(width/platformHeight)+1)*platformHeight-2;
+  newPlatformPosition=stringLevelData[0].length()*platformHeight;
   println(newPlatformPosition);
 
 
   for (int i=0; i<anzahlDerSpieler; i++) {
     Man man = new Man();
     man.x=(100+(manHeight+4)*i);
-    man.y=50;
+    man.y=platformHeight+50;
     spielFiguren.add(man);
   }
 }
@@ -59,28 +65,19 @@ void setup() {
 void draw() {
   background(255);
 
-  for (Platform platform : platforms) {
-    platform.drawPlatform();
-    platform.x-=2;
+  for (ArrayList platforms : levelData) {
+    for (Platform platform : platforms) {
+      platform.drawPlatform();
 
-    if (platform.x < -platformHeight) {
-      platform.x=newPlatformPosition;
-      if (platform.y==height-platformHeight) {
-        if (untenBlocksBauen<-1) {
-          untenBlocksBauen=(int)random(5, 10);
-          untenRobust=!untenRobust;
-        } 
+      platform.x-=2;
 
-        untenBlocksBauen--;
-        platform.platformRobust=untenRobust;
-        lastPlatformRobusticas.add(untenRobust);
-      } 
-      else {
-        platform.platformRobust=lastPlatformRobusticas.get(0);
-        lastPlatformRobusticas.remove(0);
+      if (platform.x < -platformHeight) {
+        platform.x=newPlatformPosition;
       }
     }
+    // anzahlDerLevelDurchlauefe
   }
+
   for (Man man: spielFiguren) {
     man.simulateGravity();
     man.drawMan();
@@ -111,10 +108,10 @@ class Man {
 
   int x;
   int y;
-  boolean schwerKraftUnten;
   boolean manLebendig=true;
   boolean aufgekommen=false;
   int schwerkraft=1;
+
 
   void drawMan() {
     if (manLebendig==true) {
@@ -131,6 +128,7 @@ class Man {
   }
 
   void simulateGravity() {
+
     if (y>height-platformHeight || y<platformHeight) {
       manLebendig=false;
     }
@@ -139,37 +137,24 @@ class Man {
       y+=schwerkraft*5;
     }
 
-    if (y>(height-platformHeight*2) || y<platformHeight*2) {
 
-      boolean platformUpdated=false;
+    boolean platformUpdated=false;
 
+    for (ArrayList platforms : levelData) {
       for (Platform platform : platforms) {
-        if (y>height/2) {
-          if (platform.y==height-platformHeight) {
 
-            if (platform.x-4<(x+manHeight/2) && platform.x+4+platformHeight>(x+manHeight/2)) {
-              if (platform.platformRobust) {
-                aufgekommen=true;
-                platformUpdated=true;
-              }
-            }
-          }
-        } 
-        else {
-          if (platform.y==0) {
-
-            if (platform.x-4<(x+manHeight/2) && platform.x+4+platformHeight>(x+manHeight/2)) {
-              if (platform.platformRobust) {
-                aufgekommen=true;
-                platformUpdated=true;
-              }
-            }
-          }
+        if (schwerkraft<0) {
+          
+        }
+        if (schwerkraft>0) {
         }
       }
-      if (!platformUpdated) {
-        aufgekommen=false;
-      }
+    }
+
+
+
+    if (!platformUpdated) {
+      aufgekommen=false;
     }
   }
 }

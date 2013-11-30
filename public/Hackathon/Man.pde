@@ -2,10 +2,10 @@ class Man {
 
   int x;
   int y;
-  boolean schwerKraftUnten;
   boolean manLebendig=true;
   boolean aufgekommen=false;
   int schwerkraft=1;
+
 
   void drawMan() {
     if (manLebendig==true) {
@@ -22,6 +22,7 @@ class Man {
   }
 
   void simulateGravity() {
+
     if (y>height-platformHeight || y<platformHeight) {
       manLebendig=false;
     }
@@ -30,37 +31,24 @@ class Man {
       y+=schwerkraft*5;
     }
 
-    if (y>(height-platformHeight*2) || y<platformHeight*2) {
 
-      boolean platformUpdated=false;
+    boolean platformUpdated=false;
 
+    for (ArrayList platforms : levelData) {
       for (Platform platform : platforms) {
-        if (y>height/2) {
-          if (platform.y==height-platformHeight) {
 
-            if (platform.x-4<(x+manHeight/2) && platform.x+4+platformHeight>(x+manHeight/2)) {
-              if (platform.platformRobust) {
-                aufgekommen=true;
-                platformUpdated=true;
-              }
-            }
-          }
-        } 
-        else {
-          if (platform.y==0) {
-
-            if (platform.x-4<(x+manHeight/2) && platform.x+4+platformHeight>(x+manHeight/2)) {
-              if (platform.platformRobust) {
-                aufgekommen=true;
-                platformUpdated=true;
-              }
-            }
-          }
+        if (schwerkraft<0) {
+          
+        }
+        if (schwerkraft>0) {
         }
       }
-      if (!platformUpdated) {
-        aufgekommen=false;
-      }
+    }
+
+
+
+    if (!platformUpdated) {
+      aufgekommen=false;
     }
   }
 }
