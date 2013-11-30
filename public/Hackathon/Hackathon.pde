@@ -2,8 +2,8 @@ int millisAlt;
 int untenBlocksBauen=5;
 boolean untenRobust=false;
 boolean isRunning=false;
-int manHeight=78;
-int manWidth=30;
+int manHeight=186/2;
+int manWidth=121/2;
 
 PImage bodenDecke = loadImage("bodenDecke.png");
 
@@ -17,7 +17,7 @@ ArrayList<ArrayList> levelData;
 int anzahlDerLevelDurchlauefe=0;
 
 int newPlatformPosition;
-int anzahlDerVerschiebung=5;
+
 
 
 
@@ -29,7 +29,7 @@ void setup() {
   levelData=new ArrayList<ArrayList>();
   spielFiguren=new ArrayList<Man>();
 
-  String stringLevelData[] = loadStrings("level.txt");
+  String stringLevelData[] = loadStrings("testLevel.txt");
   platformHeight=(int)(height/stringLevelData.length);
 
 
@@ -53,9 +53,15 @@ void setup() {
 
 
   //-2 ist die magische Zahl (vermutlich der Rand des Rechtecks)
-  newPlatformPosition=stringLevelData[0].length()*platformHeight;
+  newPlatformPosition=(stringLevelData[0].length()-1)*platformHeight-2;
   println(newPlatformPosition);
 
+  
+  addPlayer("la");
+  addPlayer("fr");
+  
+  startGame();
+  //start game manually
 }
 
 void draw() {
@@ -72,7 +78,6 @@ void draw() {
           platform.x=newPlatformPosition;
         }
       }
-
     }
     // anzahlDerLevelDurchlauefe
   }
@@ -85,12 +90,13 @@ void draw() {
 
     if (man.manLebendig) {
       man.drawMan();
-    } else {
+    } 
+    else {
       removePlayer(man.id);
 
-     if (spielFiguren.size() == 1) {
-       gameOver();
-     }
+      if (spielFiguren.size() == 1) {
+        gameOver();
+      }
     }
   }
 }
@@ -115,19 +121,20 @@ void removePlayer (String id) {
   }
 }
 
-/*void keyPressed() {
-  if (key == '1') {
-    touchDown(0);
-  }
-
-  if (key == '2') {
-    touchDown(1);
-  }
-
-  if (key == '3') {
-    touchDown(2);
-  }
-}*/
+//manually flip gravity
+void keyPressed() {
+ if (key == '1') {
+ touchDown("la");
+ }
+ 
+ if (key == '2') {
+ touchDown("fr");
+ }
+ 
+ if (key == '3') {
+ touchDown(2);
+ }
+ }
 
 
 void touchDown(String id) {
@@ -137,3 +144,4 @@ void touchDown(String id) {
     }
   }
 }
+
