@@ -8,9 +8,22 @@ class Man {
   int schwerkraft=1;
 
 
+  PImage frauBild=loadImage("frau.png");
+
   void drawMan() {
     if (manLebendig==true) {
-      rect(x, y, manWidth, manHeight);
+      //rect(x, y, manWidth, manHeight);
+      if (schwerkraft<0) {
+        pushMatrix();
+        translate(x,y+manHeight);
+        rotate(PI);
+        scale(-1.0,1.0);
+        image(frauBild, 0, 0, manWidth, manHeight);
+        popMatrix();
+      }
+      if (schwerkraft>0) {
+        image(frauBild, x, y, manWidth, manHeight);
+      }
     }
   }
 
