@@ -114,9 +114,10 @@ void draw() {
     else {
       removePlayer(man.id);
 
-      if (spielFiguren.size() == 1) {
-        gameOver();
-      }
+     if (spielFiguren.size() == 1) {
+       isRunning = false;
+       gameOver();
+     }
     }
   }
 }

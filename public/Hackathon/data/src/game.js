@@ -96,6 +96,8 @@
 
   window.gameOver = function () {
     cloak.message('gameOver');
+    soundManager.stop('game_song');
+    soundManager.play('menu_song');
   };
 
   cloak.run();
