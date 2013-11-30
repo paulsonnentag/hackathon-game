@@ -2,17 +2,41 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
     <title>controller</title>
 
     <link rel="stylesheet" href="assets/css/controller.css">
   </head>
   <body>
 
-    <button id="button">toggle gravity</button>
+
+    <div class="controller">
+      <div class="start-screen screen" id="start">
+        <h1>Enter your name to join the game</h1>
+
+        <input class="full-width" type="text" name="nickname" id="nameInput">
+        <input class="full-width" type="submit" value="join" id="joinButton">
+      </div>
+
+
+      <div class="controller-screen screen" id="controller">
+        <h1>Tap the screen to change the direction of gravity</h1>
+      </div>
+
+      <div class="waiting-screen screen" id="waiting">
+        <h1>Sorry all player slots are full !</h1>
+        <h2>You can join in </h2>
+      </div>
+    </div>
+
 
     <!-- libs -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/fastclick/lib/fastclick.js"></script>
     <script src="../lib/cloak-client.js"></script>
 
     <!-- controller -->

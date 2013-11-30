@@ -17,6 +17,8 @@
   var gameRoom;
   var gameClient;
 
+  var userNames = ['player1', 'player2', 'player3', 'player4'];
+
   cloak.configure({
     express: server,
     autoJoinLobby: false,
@@ -32,8 +34,13 @@
       },
 
       joinGame: function (msg, user) {
-        if (gameRoom.addMember(user) && gameRoom.getMembers().length >= MIN_USERS) {
-          gameClient.message('ready');
+        if (gameRoom.addMember(user)) {
+          user.name = userNames.shift();
+          user.message('join', {name: user.name});
+
+          if (gameRoom.getMembers().length >= MIN_USERS) {
+            gameClient.message('ready');
+          }
         } else {
           user.message('reject');
         }
@@ -71,6 +78,12 @@
       },
 
       newMember: function () {
+      },
+
+      memberLeaves: function (user) {
+        if (user.name !== 'Nameless User') {
+          userNames.unshift(user.name);
+        }
       },
 
       shouldAllowUser: function (user) {
