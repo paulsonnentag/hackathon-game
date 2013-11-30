@@ -2,10 +2,10 @@ int millisAlt;
 int untenBlocksBauen=5;
 boolean untenRobust=false;
 boolean isRunning=false;
-int manHeight=186/2;
-int manWidth=121/2;
+int manHeight=186/3;
+int manWidth=121/3;
 
-PImage bodenDecke = loadImage("bodenDecke.png");
+
 
 
 int platformHeight=30;
@@ -20,7 +20,6 @@ int newPlatformPosition;
 
 
 
-
 void setup() {
   frameRate(50);
   size(1024, 400);
@@ -29,8 +28,10 @@ void setup() {
   levelData=new ArrayList<ArrayList>();
   spielFiguren=new ArrayList<Man>();
 
-  String stringLevelData[] = loadStrings("testLevel.txt");
+  String stringLevelData[] = loadStrings("level2.txt");
   platformHeight=(int)(height/stringLevelData.length);
+
+
 
 
 
@@ -56,11 +57,11 @@ void setup() {
   newPlatformPosition=(stringLevelData[0].length()-1)*platformHeight-2;
   println(newPlatformPosition);
 
-  
-  addPlayer("la");
-  addPlayer("fr");
-  
-  startGame();
+
+  //addPlayer("la");
+  //addPlayer("fr");
+
+  //startGame();
   //start game manually
 }
 
@@ -123,18 +124,18 @@ void removePlayer (String id) {
 
 //manually flip gravity
 void keyPressed() {
- if (key == '1') {
- touchDown("la");
- }
- 
- if (key == '2') {
- touchDown("fr");
- }
- 
- if (key == '3') {
- touchDown(2);
- }
- }
+  if (key == '1') {
+    touchDown("la");
+  }
+
+  if (key == '2') {
+    touchDown("fr");
+  }
+
+  if (key == '3') {
+    touchDown(2);
+  }
+}
 
 
 void touchDown(String id) {
