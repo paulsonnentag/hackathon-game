@@ -1,3 +1,4 @@
 public/bower_components
 public/Hackathon/web-export
 node_modules
+.DS_Store
