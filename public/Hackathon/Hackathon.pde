@@ -14,39 +14,47 @@ ArrayList<Platform> platforms;
 ArrayList<Man> spielFiguren;
 
 ArrayList<ArrayList> levelData;
-int anzahlDerLevelDurchlauefe=0;
+ArrayList<String[]> stringLevelData;
 
 int newPlatformPosition;
 
+int currentLevelNo=0;
 
 
 void setup() {
   frameRate(50);
-  size(1024, 400);
+  size(1024, 600);
   platforms= new ArrayList<Platform>();
   lastPlatformRobusticas=new ArrayList<bool>();
   levelData=new ArrayList<ArrayList>();
   spielFiguren=new ArrayList<Man>();
+  stringLevelData=new ArrayList<String[]>();
 
-  String stringLevelData[] = loadStrings("level2.txt");
-  platformHeight=(int)(height/stringLevelData.length);
+  for (int i=0; i<4; i++) {
+    String[] stringOneLevelData=loadStrings("level"+i+".txt"); 
+    stringLevelData.add(stringOneLevelData);
+  }
 
+  platformHeight=(int)(height/stringLevelData.get(0).length);
 
+  manHeight=2*platformHeight-10;
+  manWidth=(int)(manHeight/1.537);
 
-
-
-  for (int i=0; i<stringLevelData.length; i++) {
+  for (int i=0; i<stringLevelData.get(currentLevelNo).length; i++) {
     ArrayList<Platform> platforms;
     platforms = new ArrayList<Platform>();
-    for (int q=0; q<stringLevelData[i].length(); q++) {
+    for (int q=0; q<stringLevelData.get(currentLevelNo)[i].length(); q++) {
       Platform platform= new Platform();
       platform.y=platformHeight*i;
+
       platform.x=platformHeight*q;
 
-      if (stringLevelData[i].substring(q, q+1).equals("x")) {
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("x")) {
         platform.platformRobust=true;
       }
       platforms.add(platform);
+      platform.xPosInArray=q;
+      platform.yPosInArray=i;
     }
     levelData.add(platforms);
   }
@@ -54,14 +62,17 @@ void setup() {
 
 
   //-2 ist die magische Zahl (vermutlich der Rand des Rechtecks)
-  newPlatformPosition=(stringLevelData[0].length()-1)*platformHeight-2;
-  println(newPlatformPosition);
+  newPlatformPosition=(stringLevelData.get(currentLevelNo)[0].length()-1)*platformHeight-2;
 
 
-  //addPlayer("la");
+
+  
+    addPlayer("la");
+  
   //addPlayer("fr");
 
-  //startGame();
+  startGame();
+
   //start game manually
 }
 
@@ -77,10 +88,22 @@ void draw() {
 
         if (platform.x < -platformHeight) {
           platform.x=newPlatformPosition;
+
+
+          if (platform.yPosInArray==0 && platform.xPosInArray==0) {
+            currentLevelNo=(int)random(0, 4);
+            //println(currentLevelNo);
+          }
+
+          if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("x")) {
+            platform.platformRobust=true;
+          } 
+          else {
+            platform.platformRobust=false;
+          }
         }
       }
     }
-    // anzahlDerLevelDurchlauefe
   }
 
   for (Man man: spielFiguren) {
@@ -95,10 +118,10 @@ void draw() {
     else {
       removePlayer(man.id);
 
-     if (spielFiguren.size() == 1) {
-       isRunning = false;
-       gameOver();
-     }
+      if (spielFiguren.size() == 1) {
+        isRunning = false;
+        gameOver();
+      }
     }
   }
 }
