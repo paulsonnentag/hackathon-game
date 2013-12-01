@@ -97,6 +97,11 @@
       userAction: function (msg) {
         console.log('toggle', msg.user.id);
         game.touchDown(msg.user.id);
+      },
+
+      join: function (msg) {
+        console.log(msg);
+        game.addPlayer(msg.id, msg.name);
       }
     },
 
@@ -118,7 +123,7 @@
         if (!clientId) {
           clientId = user.id;
         } else {
-          game.addPlayer(user.id);
+          //game.addPlayer(user.id);
         }
       },
 

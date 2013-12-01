@@ -2,7 +2,7 @@ class Man {
 
   String id;
   //typ can be "kerl-0" or "laufen0"
-  String type="kerl-0";
+  String type;
   int x;
   int y;
   boolean manLebendig=true;
@@ -17,7 +17,10 @@ class Man {
 
   PImage[] charBild;
 
-  Man() {
+  Man(String foo) {
+
+    type = foo+"0";
+
     //nicht hier laden, sonst wird das bild für jedes Objekt geladen!!!
     charBild=new PImage[4];
     

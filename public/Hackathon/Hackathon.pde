@@ -191,8 +191,9 @@ void startGame () {
   isRunning = true;
 }
 
-void addPlayer (String id) {
-  Man man = new Man();
+void addPlayer (String id, String type) {
+
+  Man man = new Man(type);
   man.x=(100+(manWidth+4)*spielFiguren.size());
   man.maximumRun= 0+spielFiguren.size()*5;
 
@@ -205,6 +206,8 @@ void addPlayer (String id) {
     man.schwerkraft=-1;
   }
 
+
+  man.type = type;
   man.id = id;
   spielFiguren.add(man);
 }

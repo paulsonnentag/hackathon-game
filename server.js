@@ -74,6 +74,7 @@
         if (gameRoom.addMember(user)) {
           user.name = userNames.shift();
           user.message('join', {name: user.name});
+          gameClient.message('join', {name: user.name, id: user.id});
 
           if (isRoomReady(gameRoom)) {
             gameClient.message('ready');
