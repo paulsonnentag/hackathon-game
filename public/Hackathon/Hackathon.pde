@@ -19,7 +19,7 @@ ArrayList<String[]> stringLevelData;
 int newPlatformPosition;
 
 int currentLevelNo=0;
-int levelCount=4;
+int levelCount=7;
 
 PImage[] bodenDecke;
 
