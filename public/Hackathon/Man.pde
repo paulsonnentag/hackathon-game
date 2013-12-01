@@ -9,6 +9,7 @@ class Man {
   int lastFrameChangeMillis=0;
   int nextFrameChange=100;
   int currentImage=(int)random(0, 6);
+  boolean gerade;
 
 
   PImage[] frauBild;
@@ -23,8 +24,7 @@ class Man {
   }
 
   void drawMan() {
-    if (millis()-lastFrameChangeMillis>nextFrameChange) {
-
+    if (millis()-lastFrameChangeMillis>nextFrameChange && isRunning) {
       currentImage++;
       lastFrameChangeMillis=millis();
     }
@@ -56,7 +56,7 @@ class Man {
   void simulateGravity() {
 
     //wenn der Spieler zu weit hinten -> beschleunigen
-    if (x<width/2) {
+    if (x<width/2 && isRunning) {
       x++;
     }
 
