@@ -6,18 +6,17 @@ class Platform {
   boolean platformRobust;
 
   PImage bodenDecke = loadImage("bodenDecke.png");
-Platform() {
- 
-}
+  Platform() {
+  }
 
   void drawPlatform() {
-    
+
     if (platformRobust) {
-      
+
       if (y==0) {
         pushMatrix();
         translate(x+platformHeight, y+platformHeight);
-        
+
         rotate(PI);
         image(bodenDecke, 0, 0, platformHeight, platformHeight);
         popMatrix();

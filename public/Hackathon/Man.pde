@@ -43,7 +43,7 @@ class Man {
       if (schwerkraft>0) {
         image(frauBild[currentImage], x, y, manWidth, manHeight);
       }
-    }
+    }    
   }
 
   void turnGravity() {

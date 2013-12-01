@@ -66,10 +66,10 @@ void setup() {
   
 
 
-  //addPlayer("la");
+  addPlayer("la");
   //addPlayer("fr");
 
-  //startGame();
+  startGame();
 
   //start game manually
 }
