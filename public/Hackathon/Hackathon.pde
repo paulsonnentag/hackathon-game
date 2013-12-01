@@ -16,6 +16,7 @@ ArrayList<String[]> stringLevelData;
 int newPlatformPosition;
 
 int currentLevelNo=0;
+int levelCount=4;
 
 
 void setup() {
@@ -27,7 +28,7 @@ void setup() {
   spielFiguren=new ArrayList<Man>();
   stringLevelData=new ArrayList<String[]>();
 
-  for (int i=0; i<4; i++) {
+  for (int i=0; i<levelCount+1; i++) {
     String[] stringOneLevelData=loadStrings("level"+i+".txt"); 
     stringLevelData.add(stringOneLevelData);
   }
@@ -72,8 +73,8 @@ void setup() {
 
   addPlayer("la");
 
-  addPlayer("fr");
-  addPlayer("sdf");
+  //addPlayer("fr");
+  //addPlayer("sdf");
 
 
   startGame();
@@ -96,7 +97,7 @@ void draw() {
 
 
           if (platform.yPosInArray==0 && platform.xPosInArray==0) {
-            currentLevelNo=(int)random(1, 4);
+            currentLevelNo=(int)random(1, levelCount+1);
             //println(currentLevelNo);
           }
 
@@ -136,7 +137,6 @@ void addPlayer (String id) {
   Man man = new Man();
   man.x=(100+(manWidth+4)*spielFiguren.size());
   man.maximumRun= 0+spielFiguren.size()*5;
-  println();
   if (spielFiguren.size()%2==0) {
     man.y=platformHeight+50;
     man.schwerkraft=1;

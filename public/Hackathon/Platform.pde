@@ -4,6 +4,7 @@ class Platform {
   int xPosInArray;
   int yPosInArray;
   boolean platformRobust;
+  int platformType;
 
   PImage bodenDecke = loadImage("bodenDecke.png");
   Platform() {
