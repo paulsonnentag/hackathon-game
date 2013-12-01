@@ -10,15 +10,16 @@ class Man {
   int nextFrameChange=100;
   int currentImage=(int)random(0, 6);
   boolean gerade;
+  int maximumRun=0;
 
 
   PImage[] frauBild;
 
   Man() {
     //nicht hier laden, sonst wird das bild für jedes Objekt geladen!!!
-    frauBild=new PImage[6];
-    for (int i=1; i<frauBild.length+1; i++) {
-      frauBild[i-1]=loadImage("laufen0"+i+".png");
+    frauBild=new PImage[7];
+    for (int i=0; i<frauBild.length; i++) {
+      frauBild[i]=loadImage("laufen0"+i+".png");
       //println("laufen0"+i+".png");
     }
   }
@@ -28,7 +29,7 @@ class Man {
       currentImage++;
       lastFrameChangeMillis=millis();
     }
-    if (currentImage>frauBild.length-1) currentImage=0;
+    if (currentImage>frauBild.length-1) currentImage=1;
 
     if (manLebendig==true) {
       //rect(x, y, manWidth, manHeight);
@@ -37,11 +38,13 @@ class Man {
         translate(x, y+manHeight);
         rotate(PI);
         scale(-1.0, 1.0);
-        image(frauBild[currentImage], 0, 0, manWidth, manHeight);
+        if(isRunning) image(frauBild[currentImage], 0, 0, manWidth, manHeight);
+        else image(frauBild[0], 0, 0, manWidth, manHeight);
         popMatrix();
       }
       if (schwerkraft>0) {
-        image(frauBild[currentImage], x, y, manWidth, manHeight);
+        if(isRunning) image(frauBild[currentImage], x, y, manWidth, manHeight);
+        else image(frauBild[0], x, y, manWidth, manHeight);
       }
     }
   }
@@ -56,7 +59,7 @@ class Man {
   void simulateGravity() {
 
     //wenn der Spieler zu weit hinten -> beschleunigen
-    if (x<width/2 && isRunning) {
+    if (x<(width/2-(maximumRun)) && isRunning) {
       x++;
     }
 

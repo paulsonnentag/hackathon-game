@@ -73,7 +73,7 @@ void setup() {
     addPlayer("sdf");
 
 
-  //startGame();
+  startGame();
 
   //start game manually
 }
@@ -132,6 +132,7 @@ void startGame () {
 void addPlayer (String id) {
   Man man = new Man();
   man.x=(100+(manWidth+4)*spielFiguren.size());
+  man.maximumRun= 0+spielFiguren.size()*5;
   println();
   if(spielFiguren.size()%2==0){
     man.y=platformHeight+50;
