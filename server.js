@@ -102,8 +102,8 @@
           fillUpRoom(gameRoom, cloak.getLobby().getMembers());
 
 
-          if (isRoomReady(gameRoom)) {
-          // gameClient.message('ready');
+          if (isRoomReady(gameRoom) && gameRoom.data.isReady === false) {
+            //gameClient.message('ready');
           }
         }
       },

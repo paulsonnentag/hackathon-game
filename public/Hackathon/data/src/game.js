@@ -73,8 +73,7 @@
 
   cloak.configure({
     messages: {
-      ready: function (msg) {
-
+      ready: _.once(function (msg) {
 
         soundManager.play('countdown_sound', {
           onfinish: function () {
@@ -92,7 +91,7 @@
 
 
         console.log('ready ...');
-      },
+      }),
 
       userAction: function (msg) {
         console.log('toggle', msg.user.id);
