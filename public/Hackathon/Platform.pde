@@ -7,6 +7,7 @@ class Platform {
 
   PImage bodenDecke = loadImage("bodenDecke.png");
   Platform() {
+    //Konstruktor
   }
 
   void drawPlatform() {

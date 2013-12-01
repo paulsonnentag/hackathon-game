@@ -18,7 +18,7 @@ class Man {
     frauBild=new PImage[6];
     for (int i=1; i<frauBild.length+1; i++) {
       frauBild[i-1]=loadImage("laufen0"+i+".png");
-      println("laufen0"+i+".png");
+      //println("laufen0"+i+".png");
     }
   }
 
@@ -43,7 +43,7 @@ class Man {
       if (schwerkraft>0) {
         image(frauBild[currentImage], x, y, manWidth, manHeight);
       }
-    }    
+    }
   }
 
   void turnGravity() {
@@ -54,6 +54,11 @@ class Man {
   }
 
   void simulateGravity() {
+
+    //wenn der Spieler zu weit hinten -> beschleunigen
+    if (x<width/2) {
+      x++;
+    }
 
     if (y>height || y<0 || x<-manWidth) {
       manLebendig=false;

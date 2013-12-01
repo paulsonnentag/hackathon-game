@@ -37,7 +37,7 @@ void setup() {
 
   platformHeight=(int)(height/stringLevelData.get(0).length);
 
-  manHeight=2*platformHeight;
+  manHeight=2*platformHeight-10;
   manWidth=(int)(manHeight/1.537);
 
   for (int i=0; i<stringLevelData.get(currentLevelNo).length; i++) {
@@ -63,10 +63,12 @@ void setup() {
 
   //-2 ist die magische Zahl (vermutlich der Rand des Rechtecks)
   newPlatformPosition=(stringLevelData.get(currentLevelNo)[0].length()-1)*platformHeight-2;
+
+
+
   
-
-
-  addPlayer("la");
+    addPlayer("la");
+  
   //addPlayer("fr");
 
   startGame();
@@ -90,7 +92,7 @@ void draw() {
 
           if (platform.yPosInArray==0 && platform.xPosInArray==0) {
             currentLevelNo=(int)random(0, 4);
-            println(currentLevelNo);
+            //println(currentLevelNo);
           }
 
           if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("x")) {
@@ -116,10 +118,10 @@ void draw() {
     else {
       removePlayer(man.id);
 
-     if (spielFiguren.size() == 1) {
-       isRunning = false;
-       gameOver();
-     }
+      if (spielFiguren.size() == 1) {
+        isRunning = false;
+        gameOver();
+      }
     }
   }
 }
