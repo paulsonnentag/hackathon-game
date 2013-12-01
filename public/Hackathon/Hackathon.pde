@@ -101,7 +101,7 @@ void setup() {
 
 
 
-  addPlayer("la");
+  //addPlayer("la");
 
   //addPlayer("fr");
 
@@ -114,7 +114,7 @@ void setup() {
 
 
 
-  startGame();
+  //startGame();
 
   //start game manually
 }

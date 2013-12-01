@@ -108,12 +108,10 @@
       },
 
       userAction: function (msg, user) {
-        if (gameRoom.data.isRunning) {
-          gameClient.message('userAction', {
-            action: msg,
-            user: {id: user.id}
-          });
-        }
+        gameClient.message('userAction', {
+          action: msg,
+          user: {id: user.id}
+        });
       }
     },
 
