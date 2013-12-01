@@ -5,9 +5,6 @@ boolean isRunning=false;
 int manHeight=186/3;
 int manWidth=121/3;
 
-
-
-
 int platformHeight=30;
 
 ArrayList<Platform> platforms;
@@ -66,9 +63,9 @@ void setup() {
 
 
 
-  
-    addPlayer("la");
-  
+
+  addPlayer("la");
+
   //addPlayer("fr");
 
   startGame();
@@ -91,7 +88,7 @@ void draw() {
 
 
           if (platform.yPosInArray==0 && platform.xPosInArray==0) {
-            currentLevelNo=(int)random(0, 4);
+            currentLevelNo=(int)random(1, 4);
             //println(currentLevelNo);
           }
 
