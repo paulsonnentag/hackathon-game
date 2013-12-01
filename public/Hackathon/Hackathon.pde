@@ -21,6 +21,7 @@ int newPlatformPosition;
 int currentLevelNo=0;
 int levelCount=4;
 
+PImage[] bodenDecke;
 
 void setup() {
   frameRate(50);
@@ -36,6 +37,16 @@ void setup() {
     stringLevelData.add(stringOneLevelData);
   }
 
+  bodenDecke=new PImage[6];
+  bodenDecke[0]=loadImage("L.png");
+  bodenDecke[1]=loadImage("T.png");
+  bodenDecke[2]=loadImage("N.png");
+  bodenDecke[3]=loadImage("H.png");
+  bodenDecke[4]=loadImage("U.png");
+  bodenDecke[5]=loadImage("C.png");
+
+
+
   platformHeight=(int)(height/stringLevelData.get(0).length);
 
   manHeight=2*platformHeight-10;
@@ -50,8 +61,29 @@ void setup() {
 
       platform.x=platformHeight*q;
 
-      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("x")) {
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("L")) {
         platform.platformRobust=true;
+        platform.platformType=0;
+      }
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("T")) {
+        platform.platformRobust=true;
+        platform.platformType=1;
+      }
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("N")) {
+        platform.platformRobust=true;
+        platform.platformType=2;
+      }
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("H")) {
+        platform.platformRobust=true;
+        platform.platformType=3;
+      }
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("U")) {
+        platform.platformRobust=true;
+        platform.platformType=4;
+      }
+      if (stringLevelData.get(currentLevelNo)[i].substring(q, q+1).equals("C")) {
+        platform.platformRobust=true;
+        platform.platformType=5;
       }
       platforms.add(platform);
       platform.xPosInArray=q;
@@ -69,7 +101,7 @@ void setup() {
 
 
 
-  //addPlayer("la");
+  addPlayer("la");
 
   //addPlayer("fr");
 
@@ -82,7 +114,7 @@ void setup() {
 
 
 
-  //startGame();
+  startGame();
 
   //start game manually
 }
@@ -103,12 +135,32 @@ void draw() {
 
           if (platform.yPosInArray==0 && platform.xPosInArray==0) {
             currentLevelNo=(int)random(1, levelCount+1);
-
-            //println(currentLevelNo);
           }
 
-          if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("x")) {
+          if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("L")) {
             platform.platformRobust=true;
+            platform.platformType=0;
+          }
+          
+          else if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("T")) {
+            platform.platformRobust=true;
+            platform.platformType=1;
+          }
+          else if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("N")) {
+            platform.platformRobust=true;
+            platform.platformType=2;
+          }
+          else if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("H")) {
+            platform.platformRobust=true;
+            platform.platformType=3;
+          }
+          else if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("U")) {
+            platform.platformRobust=true;
+            platform.platformType=4;
+          }
+          else if (stringLevelData.get(currentLevelNo)[platform.yPosInArray].substring(platform.xPosInArray, platform.xPosInArray+1).equals("C")) {
+            platform.platformRobust=true;
+            platform.platformType=5;
           } 
           else {
             platform.platformRobust=false;
@@ -119,7 +171,7 @@ void draw() {
   }
 
   for (Man man: spielFiguren) {
-      man.simulateGravity();
+    man.simulateGravity();
 
     if (man.manLebendig) {
       man.drawMan();
@@ -144,14 +196,15 @@ void addPlayer (String id) {
   man.x=(100+(manWidth+4)*spielFiguren.size());
   man.maximumRun= 0+spielFiguren.size()*5;
 
-  if(spielFiguren.size()%2==0){
+  if (spielFiguren.size()%2==0) {
     man.y=platformHeight+50;
     man.schwerkraft=1;
-}else{
+  }
+  else {
     man.y=height/2; // -(platformHeight+50)
     man.schwerkraft=-1;
   }
- 
+
   man.id = id;
   spielFiguren.add(man);
 }
@@ -166,7 +219,7 @@ void removePlayer (String id) {
 
 //manually flip gravity
 void keyPressed() {
-  
+
   if (key == '1') {
     touchDown("la");
   }

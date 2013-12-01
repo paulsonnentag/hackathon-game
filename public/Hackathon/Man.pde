@@ -1,6 +1,8 @@
 class Man {
 
   String id;
+  //typ can be "kerl-0" or "laufen0"
+  String type="kerl-0";
   int x;
   int y;
   boolean manLebendig=true;
@@ -8,19 +10,21 @@ class Man {
   int schwerkraft=1;
   int lastFrameChangeMillis=0;
   int nextFrameChange=100;
-  int currentImage=(int)random(0, 6);
+  int currentImage=(int)random(1, 3);
   boolean gerade;
   int maximumRun=0;
 
 
-  PImage[] frauBild;
+  PImage[] charBild;
 
   Man() {
     //nicht hier laden, sonst wird das bild für jedes Objekt geladen!!!
-    frauBild=new PImage[7];
-    for (int i=0; i<frauBild.length; i++) {
-      frauBild[i]=loadImage("laufen0"+i+".png");
-      //println("laufen0"+i+".png");
+    charBild=new PImage[4];
+    
+    for (int i=0; i<charBild.length; i++) {
+      
+      charBild[i]=loadImage(type+i+".png");
+      
     }
   }
 
@@ -29,7 +33,7 @@ class Man {
       currentImage++;
       lastFrameChangeMillis=millis();
     }
-    if (currentImage>frauBild.length-1) currentImage=1;
+    if (currentImage>charBild.length-1) currentImage=1;
 
     if (manLebendig==true) {
       //rect(x, y, manWidth, manHeight);
@@ -38,13 +42,13 @@ class Man {
         translate(x, y+manHeight);
         rotate(PI);
         scale(-1.0, 1.0);
-        if(isRunning) image(frauBild[currentImage], 0, 0, manWidth, manHeight);
-        else image(frauBild[0], 0, 0, manWidth, manHeight);
+        if(isRunning) image(charBild[currentImage], 0, 0, manWidth, manHeight);
+        else image(charBild[0], 0, 0, manWidth, manHeight);
         popMatrix();
       }
       if (schwerkraft>0) {
-        if(isRunning) image(frauBild[currentImage], x, y, manWidth, manHeight);
-        else image(frauBild[0], x, y, manWidth, manHeight);
+        if(isRunning) image(charBild[currentImage], x, y, manWidth, manHeight);
+        else image(charBild[0], x, y, manWidth, manHeight);
       }
     }
   }

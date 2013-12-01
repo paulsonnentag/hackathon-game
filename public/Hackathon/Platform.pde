@@ -6,7 +6,8 @@ class Platform {
   boolean platformRobust;
   int platformType;
 
-  PImage bodenDecke = loadImage("bodenDecke.png");
+  
+
   Platform() {
     //Konstruktor
   }
@@ -15,17 +16,7 @@ class Platform {
 
     if (platformRobust) {
 
-      if (y==0) {
-        pushMatrix();
-        translate(x+platformHeight, y+platformHeight);
-
-        rotate(PI);
-        image(bodenDecke, 0, 0, platformHeight, platformHeight);
-        popMatrix();
-      } 
-      else {
-        image(bodenDecke, x, y, platformHeight, platformHeight);
-      }
+      image(bodenDecke[platformType], x, y, platformHeight, platformHeight);
     }
   }
 }
