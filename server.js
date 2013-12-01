@@ -102,7 +102,7 @@
 
 
           if (isRoomReady(gameRoom)) {
-            gameClient.message('ready');
+          // gameClient.message('ready');
           }
         }
       },

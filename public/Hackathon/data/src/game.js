@@ -134,7 +134,7 @@
 
     var textMessage = document.getElementById('text-message');
 
-    textMessage.innerHTML =
+    textMessage.innerHTML = "Game Over";
     textMessage.style.transition = 'all 0.5s ease-in';
     textMessage.classList.add('show');
 
@@ -143,7 +143,7 @@
 
       textMessage.classList.remove('show');
 
-      cloak.message('gameOver');
+      //cloak.message('gameOver');
 
       soundManager.play('menu_song');
       soundManager.stop('game_song');
