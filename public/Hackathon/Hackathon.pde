@@ -5,6 +5,9 @@ boolean isRunning=false;
 int manHeight=186/3;
 int manWidth=121/3;
 
+
+
+
 int platformHeight=30;
 
 ArrayList<Platform> platforms;
@@ -63,17 +66,11 @@ void setup() {
 
 
 
-
-
-  //addPlayer("la");
-
-  //addPlayer("fr");
-
-
-  addPlayer("la");
-
+  
+    addPlayer("la");
+  
   addPlayer("fr");
-  addPlayer("sdf");
+    addPlayer("sdf");
 
 
   startGame();
@@ -96,7 +93,7 @@ void draw() {
 
 
           if (platform.yPosInArray==0 && platform.xPosInArray==0) {
-            currentLevelNo=(int)random(1, 4);
+            currentLevelNo=(int)random(0, 4);
             //println(currentLevelNo);
           }
 
@@ -112,7 +109,7 @@ void draw() {
   }
 
   for (Man man: spielFiguren) {
-    man.simulateGravity();
+      man.simulateGravity();
 
     if (man.manLebendig) {
       man.drawMan();
@@ -136,16 +133,14 @@ void addPlayer (String id) {
   Man man = new Man();
   man.x=(100+(manWidth+4)*spielFiguren.size());
   man.maximumRun= 0+spielFiguren.size()*5;
-  println();
-  if (spielFiguren.size()%2==0) {
+  if(spielFiguren.size()%2==0){
     man.y=platformHeight+50;
     man.schwerkraft=1;
-  }
-  else {
+}else{
     man.y=height/2; // -(platformHeight+50)
     man.schwerkraft=-1;
   }
-
+ 
   man.id = id;
   spielFiguren.add(man);
 }
@@ -160,7 +155,7 @@ void removePlayer (String id) {
 
 //manually flip gravity
 void keyPressed() {
-
+  
   if (key == '1') {
     touchDown("la");
   }
