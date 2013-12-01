@@ -23,7 +23,7 @@ int currentLevelNo=0;
 
 void setup() {
   frameRate(50);
-  size(1024, 400);
+  size(1024, 600);
   platforms= new ArrayList<Platform>();
   lastPlatformRobusticas=new ArrayList<bool>();
   levelData=new ArrayList<ArrayList>();
@@ -37,6 +37,8 @@ void setup() {
 
   platformHeight=(int)(height/stringLevelData.get(0).length);
 
+  manHeight=2*platformHeight;
+  manWidth=(int)(manHeight/1.537);
 
   for (int i=0; i<stringLevelData.get(currentLevelNo).length; i++) {
     ArrayList<Platform> platforms;
@@ -61,13 +63,13 @@ void setup() {
 
   //-2 ist die magische Zahl (vermutlich der Rand des Rechtecks)
   newPlatformPosition=(stringLevelData.get(currentLevelNo)[0].length()-1)*platformHeight-2;
-  println(newPlatformPosition);
+  
 
 
-  addPlayer("la");
+  //addPlayer("la");
   //addPlayer("fr");
 
-  startGame();
+  //startGame();
 
   //start game manually
 }

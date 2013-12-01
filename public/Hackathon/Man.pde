@@ -14,6 +14,7 @@ class Man {
   PImage[] frauBild;
 
   Man() {
+    //nicht hier laden, sonst wird das bild für jedes Objekt geladen!!!
     frauBild=new PImage[6];
     for (int i=1; i<frauBild.length+1; i++) {
       frauBild[i-1]=loadImage("laufen0"+i+".png");
@@ -54,7 +55,7 @@ class Man {
 
   void simulateGravity() {
 
-    if (y>height || y<0 || x<0) {
+    if (y>height || y<0 || x<-manWidth) {
       manLebendig=false;
     }
 
