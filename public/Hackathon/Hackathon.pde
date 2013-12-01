@@ -64,11 +64,19 @@ void setup() {
 
 
 
-  addPlayer("la");
+
+  //addPlayer("la");
 
   //addPlayer("fr");
 
-  startGame();
+
+  addPlayer("la");
+
+  addPlayer("fr");
+  addPlayer("sdf");
+
+
+  //startGame();
 
   //start game manually
 }
@@ -104,10 +112,7 @@ void draw() {
   }
 
   for (Man man: spielFiguren) {
-
-    if (isRunning) {
-      man.simulateGravity();
-    }
+    man.simulateGravity();
 
     if (man.manLebendig) {
       man.drawMan();
@@ -130,7 +135,16 @@ void startGame () {
 void addPlayer (String id) {
   Man man = new Man();
   man.x=(100+(manWidth+4)*spielFiguren.size());
-  man.y=platformHeight+50;
+  println();
+  if (spielFiguren.size()%2==0) {
+    man.y=platformHeight+50;
+    man.schwerkraft=1;
+  }
+  else {
+    man.y=height/2; // -(platformHeight+50)
+    man.schwerkraft=-1;
+  }
+
   man.id = id;
   spielFiguren.add(man);
 }
@@ -145,6 +159,7 @@ void removePlayer (String id) {
 
 //manually flip gravity
 void keyPressed() {
+
   if (key == '1') {
     touchDown("la");
   }

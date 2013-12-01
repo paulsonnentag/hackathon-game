@@ -9,6 +9,37 @@
   var clientId;
   var room;
 
+  function countDown (time, callback) {
+    var textMessage = document.getElementById('text-message');
+
+    var interval = setInterval(function () {
+      textMessage.innerHTML = time;
+
+      textMessage.style.transition = 'none';
+      textMessage.classList.remove('show');
+
+      setTimeout(function () {
+        textMessage.style.transition = 'all 0.5s ease-in';
+        textMessage.classList.add('show');
+      });
+
+      console.log(time);
+
+      if (time > 0 ) {
+        time--;
+
+      } else {
+
+        setTimeout(function () {
+          textMessage.classList.remove('show');
+        });
+
+        clearInterval(interval);
+      }
+
+    }, 1000);
+  }
+
   soundManager.setup({
     // where to find the SWF files, if needed
     url: '../../bower_components/soundmanager2/swf/soundmanager2.swf',
@@ -55,6 +86,10 @@
           }
         });
 
+        countDown(10, function () {
+
+        });
+
 
         console.log('ready ...');
       },
@@ -95,9 +130,28 @@
   });
 
   window.gameOver = function () {
-    cloak.message('gameOver');
-    soundManager.stop('game_song');
-    soundManager.play('menu_song');
+
+
+    var textMessage = document.getElementById('text-message');
+
+    textMessage.innerHTML =
+    textMessage.style.transition = 'all 0.5s ease-in';
+    textMessage.classList.add('show');
+
+    setTimeout(function () {
+
+
+      textMessage.classList.remove('show');
+
+      cloak.message('gameOver');
+
+      soundManager.play('menu_song');
+      soundManager.stop('game_song');
+
+
+    }, 5000);
+
+
   };
 
   cloak.run();
