@@ -9,6 +9,7 @@
   "private": true,
   "dependencies": {
     "underscore": "~1.5.2",
-    "fastclick": "~0.6.10"
+    "fastclick": "~0.6.10",
+    "soundmanager2": "*"
   }
 }
