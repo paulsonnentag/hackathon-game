@@ -39,19 +39,20 @@ h1, h2 {
 }
 
 .screen.player1 {
-    background-color: blue;
+    background-color: lime;
 }
 
 .screen.player2 {
+    background-color: #add8e6;
+}
+
+.screen.player3 {
+    background-color: black;
+    color: white;
+}
+
+.screen.player3 {
     background-color: red;
-}
-
-.screen.player3 {
-    background-color: green;
-}
-
-.screen.player3 {
-    background-color: #ffff00;
 }
 
 
